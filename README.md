@@ -5,6 +5,8 @@ go install github.com/xh-dev-go/JsonFormatting@latest
 
 ## Commands options
 ```
+-i string indentation with
+-indent string indentation with (default "  ")
 -p	      pretty print json (default true)
 -pretty   pretty print json
 -u	      packed json

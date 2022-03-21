@@ -7,6 +7,7 @@ import (
 	"github.com/atotto/clipboard"
 	"github.com/xh-dev-go/xhUtils/flagUtils"
 	"github.com/xh-dev-go/xhUtils/flagUtils/flagBool"
+	"github.com/xh-dev-go/xhUtils/flagUtils/flagString"
 	"os"
 )
 
@@ -17,6 +18,9 @@ func main() {
 	uglyPrintVar := flagBool.
 		New("u", "packed json").
 		BindCmd().Share("ugly", "packed json").BindCmd()
+
+	indentWithVar := flagString.NewDefault("indent", "  ", "indentation with").BindCmd().
+		Share("i", "indentation with").BindCmd()
 
 	versionVar := flagUtils.Version().BindCmd()
 
@@ -58,7 +62,7 @@ func main() {
 		os.Exit(0)
 	}
 	if prettyPrintVar.Value() {
-		indent, err := json.MarshalIndent(m, "", "  ")
+		indent, err := json.MarshalIndent(m, "", indentWithVar.Value())
 		if err != nil {
 			panic(err)
 		}
